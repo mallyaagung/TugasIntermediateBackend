@@ -1,4 +1,4 @@
-const commonHelper = require('../helper/common');
+const createError = require('http-errors')
 
 const verify = (permission) => {
     return (req, res, next) => {
@@ -6,7 +6,7 @@ const verify = (permission) => {
         if (permission.includes(userRole)) {
             next()
         } else {
-            return commonHelper.response(res, null, 401, 'You dont have permission')
+            return next(createError(401, "You are not allowed to access this page"))
         }
     }
 }

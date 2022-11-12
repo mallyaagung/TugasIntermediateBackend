@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const createError = require('http-errors')
 const app = express();
 const productRouter = require('./src/routes/product')
@@ -14,9 +14,8 @@ const userRouter = require('./src/routes/user')
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 app.use('/img', express.static('./upload'))
-
 
 app.use('/product', productRouter)
 app.use('/category', categoryRouter)

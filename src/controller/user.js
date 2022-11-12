@@ -54,12 +54,12 @@ const userController = {
             user.token = authHelper.generateToken(payload)
             user.refreshToken = authHelper.generateRefreshToken(payload)
 
-            commonHelper.response(res, user, 201, 'login is successful')
+            commonHelper.response(res, user, 201, 'Login is successful')
         } catch (error) {
             console.log(error);
         }
     },
-    profile: async (req, res) => {
+    profile: async (req, res,next) => {
         const email = req.payload.email
         const { rows: [user] } = await findEmail(email)
         delete user.password
@@ -76,7 +76,7 @@ const userController = {
             token: authHelper.generateToken(payload),
             refreshToken: authHelper.generateRefreshToken(payload)
         }
-        commonHelper.response(res, result, 200)
+        commonHelper.response(res, result, 200, 'Token Refreshed')
 
     }
 }

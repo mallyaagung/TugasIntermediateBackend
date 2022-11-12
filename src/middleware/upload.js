@@ -11,18 +11,26 @@ const storage = multer.diskStorage({
     }
 })
 
+const fileFiltered = (req, file, cb) => {
+    const fileSize = parseInt(req.headers['content-length']);
+    try {
+        if (fileSize > 2048 * 1000) throw ('Image size is more than 2MB!')
+        if ((!file.originalname.match(/\.(jpg|jpeg|png)$/))) throw ('You can only upload .png or .jpg file')
+        cb(null, true);
+    } catch (error) {
+        cb(new createError(400, error))
+    }
+}
+
+
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 1000000 // 1000000 Bytes = 1 MB
+        fieldSize: 2048 * 1000
     },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(png|jpg)$/)) {
-            return cb(new createError(400, 'File is not an image!'))
-        }
-        cb(undefined, true)
-    }
+    fileFilter: fileFiltered
 })
+
 
 
 module.exports = upload
