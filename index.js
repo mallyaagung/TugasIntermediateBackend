@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
 });
 
 const host = process.env.DB_HOST;
-const port = process.env.PORT;
-app.listen(8585, () => {
-  console.log(`server running on http://${host}:${port}`);
+const port = process.env.PGPORT;
+app.listen(port, () => {
+  console.log(`server running`);
 });
