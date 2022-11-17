@@ -32,6 +32,10 @@ app.use("/category", categoryRouter);
 app.use("/transaction", transactionRouter);
 app.use("/user", userRouter);
 
+app.get("/", (req, res) => {
+  res.json(`Blanja Api v1.0`);
+});
+
 app.all("*", (req, res, next) => {
   next(new createError.NotFound());
 });
