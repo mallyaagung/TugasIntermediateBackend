@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-// const helmet = require('helmet');
+const helmet = require("helmet");
 const createError = require("http-errors");
 const app = express();
 const productRouter = require("./src/routes/product");
@@ -19,7 +19,12 @@ app.use(
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
-// app.use(helmet());
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+  })
+);
 app.use("/img", express.static("./upload"));
 
 app.use("/product", productRouter);
