@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: `https://blanja-one.vercel.app`,
+    origin: `*`,
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
